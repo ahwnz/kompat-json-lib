@@ -8,7 +8,6 @@
 \*------------------------------------------------------------------*/
 package nz.ahw.kompat.jsonlib
 
-import net.sf.json.JSONNull
 import net.sf.json.JSONObject as SFJSONObject
 
 class JSONObject(override val json: SFJSONObject = SFJSONObject()): JSON {
@@ -32,7 +31,7 @@ class JSONObject(override val json: SFJSONObject = SFJSONObject()): JSON {
     fun element(key: String, value: Double): JSONObject { json.element(key, value); return this }
     fun element(key: String, value: Int): JSONObject { json.element(key, value); return this }
     fun element(key: String, value: JSONArray): JSONObject { json.element(key, value); return this }
-    fun element(key: String, value: JSONNull): JSONObject { json.element(key, value); return this }
+    fun element(key: String, value: JSONNull): JSONObject { json.element(key, value.json); return this }
     fun element(key: String, value: JSONObject): JSONObject { json.element(key, value); return this }
     fun element(key: String, value: Long): JSONObject { json.element(key, value); return this }
     fun element(key: String, value: String): JSONObject { json.element(key, value); return this }
@@ -81,7 +80,10 @@ class JSONObject(override val json: SFJSONObject = SFJSONObject()): JSON {
     operator fun plusAssign(keyValues: Iterable<Pair<String, Any>>) { plus(keyValues.toMap()) }
     operator fun plusAssign(map: Map<String, Any>) { putAll(map) }
 
-    fun put(key: String, value: Any) = json.put(key, value)
+    fun put(key: String, value: Any) {
+        if(value is JSONNull) json.put(key, value.json)
+        else json.put(key, value)
+    }
     fun putAll(map: Map<String, Any>) = json.putAll(map)
 
     fun remove(key: String) = json.remove(key)

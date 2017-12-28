@@ -11,8 +11,6 @@ package nz.ahw.kompat.jsonlib
 import net.sf.json.JSONArray as SFJSONArray
 import net.sf.json.JSONObject as SFJSONObject
 
-val JSONNull = net.sf.json.JSONNull.getInstance()
-
 // Wrapping  -----------------------------------------------------------------------------------------------------------
 
 fun SFJSONArray.wrap(): JSONArray = JSONArray(this)

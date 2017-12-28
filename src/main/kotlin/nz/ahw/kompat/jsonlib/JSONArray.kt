@@ -8,7 +8,6 @@
 \*------------------------------------------------------------------*/
 package nz.ahw.kompat.jsonlib
 
-import net.sf.json.JSONNull
 import net.sf.json.JSONArray as SFJSONArray
 
 class JSONArray(override val json: SFJSONArray = SFJSONArray()): JSON, Iterable<Any> {
@@ -31,7 +30,7 @@ class JSONArray(override val json: SFJSONArray = SFJSONArray()): JSON, Iterable<
     fun element(value: Double): JSONArray { json.element(value); return this }
     fun element(value: Int): JSONArray { json.element(value); return this }
     fun element(value: JSONArray): JSONArray { json.element(value); return this }
-    fun element(value: JSONNull): JSONArray { json.element(value); return this }
+    fun element(value: JSONNull): JSONArray { json.element(value.json); return this }
     fun element(value: JSONObject): JSONArray { json.element(value); return this }
     fun element(value: Long): JSONArray { json.element(value); return this }
     fun element(value: String): JSONArray { json.element(value); return this }
@@ -106,7 +105,7 @@ class JSONArray(override val json: SFJSONArray = SFJSONArray()): JSON, Iterable<
     operator fun set(index: Int, value: Double) { add(index, value) }
     operator fun set(index: Int, value: Int) { add(index, value) }
     operator fun set(index: Int, value: JSONArray) { add(index, value) }
-    operator fun set(index: Int, value: JSONNull) { add(index, value) }
+    operator fun set(index: Int, value: JSONNull) { add(index, value.json) }
     operator fun set(index: Int, value: JSONObject) { add(index, value) }
     operator fun set(index: Int, value: Long) { add(index, value) }
     operator fun set(index: Int, value: String) { add(index, value) }
