@@ -67,6 +67,7 @@ class JSONArray(override val json: SFJSONArray = SFJSONArray()): JSON, Iterable<
 
     val indices: IntRange get() = 0 until size
 
+    @Suppress("UNCHECKED_CAST")
     override fun iterator(): Iterator<Any> = json.iterator() as Iterator<Any>
 
     operator fun minus(index: Int): JSONArray { remove(index); return this }
@@ -112,7 +113,10 @@ class JSONArray(override val json: SFJSONArray = SFJSONArray()): JSON, Iterable<
 
     val size: Int get() = json.size
 
+    @Suppress("UNCHECKED_CAST")
     fun toArray(): Array<Any> = SFJSONArray.toArray(json) as Array<Any>
+
+    @Suppress("UNCHECKED_CAST")
     fun toList(): List<Any> = SFJSONArray.toCollection(json).toList() as List<Any>
     override fun toString(): String = json.toString()
 

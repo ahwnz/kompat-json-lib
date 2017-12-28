@@ -64,6 +64,7 @@ class JSONObject(override val json: SFJSONObject = SFJSONObject()): JSON {
 
     override fun hashCode(): Int = json.hashCode()
 
+    @Suppress("UNCHECKED_CAST")
     val keys: Set<String> get() = json.keys as Set<String>
 
     operator fun minus(key: String): JSONObject { remove(key); return this }
@@ -103,6 +104,7 @@ class JSONObject(override val json: SFJSONObject = SFJSONObject()): JSON {
     inline fun <reified T> toBean(): T = SFJSONObject.toBean(json, T::class.java) as T
     override fun toString(): String = json.toString()
 
+    @Suppress("UNCHECKED_CAST")
     val values: Collection<Any> get() = json.values as Collection<Any>
 
     companion object {
