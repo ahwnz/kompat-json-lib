@@ -14,9 +14,9 @@ class JSONArray(override val json: SFJSONArray = SFJSONArray()): JSON, Iterable<
 
     override fun unwrap(): SFJSONArray = json
 
-    fun add(value: Any) = json.add(value)
-    fun add(index: Int, value: Any) = json.add(index, value)
-    fun addAll(collection: Collection<Any>) = json.addAll(collection)
+    fun add(value: Any) =  json.add((value as? JSON)?.json ?: value)
+    fun add(index: Int, value: Any) = json.add(index, (value as? JSON)?.json ?: value)
+    fun addAll(collection: Collection<Any>) = json.addAll(collection.map { value -> (value as? JSON)?.json ?: value })
 
     fun clear() { json.clear() }
 
@@ -29,9 +29,9 @@ class JSONArray(override val json: SFJSONArray = SFJSONArray()): JSON, Iterable<
     fun element(value: Boolean): JSONArray { json.element(value); return this }
     fun element(value: Double): JSONArray { json.element(value); return this }
     fun element(value: Int): JSONArray { json.element(value); return this }
-    fun element(value: JSONArray): JSONArray { json.element(value); return this }
+    fun element(value: JSONArray): JSONArray { json.element(value.json); return this }
     fun element(value: JSONNull): JSONArray { json.element(value.json); return this }
-    fun element(value: JSONObject): JSONArray { json.element(value); return this }
+    fun element(value: JSONObject): JSONArray { json.element(value.json); return this }
     fun element(value: Long): JSONArray { json.element(value); return this }
     fun element(value: String): JSONArray { json.element(value); return this }
 
@@ -105,9 +105,9 @@ class JSONArray(override val json: SFJSONArray = SFJSONArray()): JSON, Iterable<
     operator fun set(index: Int, value: Boolean) { add(index, value) }
     operator fun set(index: Int, value: Double) { add(index, value) }
     operator fun set(index: Int, value: Int) { add(index, value) }
-    operator fun set(index: Int, value: JSONArray) { add(index, value) }
+    operator fun set(index: Int, value: JSONArray) { add(index, value.json) }
     operator fun set(index: Int, value: JSONNull) { add(index, value.json) }
-    operator fun set(index: Int, value: JSONObject) { add(index, value) }
+    operator fun set(index: Int, value: JSONObject) { add(index, value.json) }
     operator fun set(index: Int, value: Long) { add(index, value) }
     operator fun set(index: Int, value: String) { add(index, value) }
 

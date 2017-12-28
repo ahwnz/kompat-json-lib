@@ -30,9 +30,9 @@ class JSONObject(override val json: SFJSONObject = SFJSONObject()): JSON {
     fun element(key: String, value: Boolean): JSONObject { json.element(key, value); return this }
     fun element(key: String, value: Double): JSONObject { json.element(key, value); return this }
     fun element(key: String, value: Int): JSONObject { json.element(key, value); return this }
-    fun element(key: String, value: JSONArray): JSONObject { json.element(key, value); return this }
+    fun element(key: String, value: JSONArray): JSONObject { json.element(key, value.json); return this }
     fun element(key: String, value: JSONNull): JSONObject { json.element(key, value.json); return this }
-    fun element(key: String, value: JSONObject): JSONObject { json.element(key, value); return this }
+    fun element(key: String, value: JSONObject): JSONObject { json.element(key, value.json); return this }
     fun element(key: String, value: Long): JSONObject { json.element(key, value); return this }
     fun element(key: String, value: String): JSONObject { json.element(key, value); return this }
 
@@ -82,10 +82,9 @@ class JSONObject(override val json: SFJSONObject = SFJSONObject()): JSON {
     operator fun plusAssign(map: Map<String, Any>) { putAll(map) }
 
     fun put(key: String, value: Any) {
-        if(value is JSONNull) json.put(key, value.json)
-        else json.put(key, value)
+        json.put(key, (value as? JSON)?.json ?: value)
     }
-    fun putAll(map: Map<String, Any>) = json.putAll(map)
+    fun putAll(map: Map<String, Any>) = json.putAll(map.mapValues { value -> (value as? JSON)?.json ?: value })
 
     fun remove(key: String) = json.remove(key)
     fun removeAll(keys: Iterable<String>) { for(key in keys) remove(key) }

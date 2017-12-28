@@ -49,7 +49,7 @@ Add the dependency
 
 ```xml
 <dependency>
-    <groupId>nz.ahwnz.kompat</groupId>
+    <groupId>nz.ahw.kompat</groupId>
     <artifactId>kompat-json-lib</artifactId>
     <version>{version}</version>
 </dependency>
