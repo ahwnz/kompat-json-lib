@@ -4,6 +4,9 @@ kompat-json-lib
 A Kotlin compatibility layer for working with the `net.sf.json-lib` JSON Library.
 
 [ ![Download](https://api.bintray.com/packages/ahwnz/kompat/kompat-json-lib/images/download.svg) ](https://bintray.com/ahwnz/kompat/kompat-json-lib/_latestVersion)
+[ ![Kotlin](https://img.shields.io/badge/Kotlin-1.2-orange.svg) ](https://kotlinlang.org/)
+[ ![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-green.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
+
 
 ## Building JSON
 
